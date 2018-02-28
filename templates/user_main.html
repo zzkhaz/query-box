@@ -1,0 +1,53 @@
+<!--引入Flask-Bootstrap中的基模板-->
+{%extends 'bootstrap/base.html'%}
+
+<!--添加html属性-->
+{%block html_attribs%}lang="zh-cn"{%endblock%}
+
+<!--添加metas标签-->
+{%block metas%}
+    {{super()}}
+    <meta charset="UTF-8">
+{%endblock%}
+
+<!--网页标题-->
+{%block title%}{{ user_name }}的提问箱{%endblock%}
+
+<!--网页正文-->
+{%block content%}
+<div class="page-header">
+  <h1 align="center">{{ user_name }}<small>的提问箱</small></h1>
+</div>
+<h4 align="center">任何人都可以发出提问</h4><br/>
+{%if qa_list%}
+<h5 align="center">{{ user_name }}过去回答了...<h5>
+<div class="col-center-block" align="center" >
+    {%for f in qa_list%}
+        <table class="table-striped table-hover table-condensed" border="0">
+            <tr>
+                <th>Q:</th>
+                <td>{{ f.QUESTION }}</td>
+            </tr>
+            <tr>
+                <th>A:</th>
+                <td>{{ f.ANSWER }}</td>
+            </tr>
+        </table>
+        <br/>
+    {%endfor%}
+</div>
+{%endif%}
+<form method="post">
+    <div class="form-group" align="center">
+        <label for="exampleInputEmail1" >让我们立即问{{ user_name }}</label>
+        <textarea cols="20" name="question" class="form-control" rows="5"></textarea>
+        <span id="helpBlock" class="help-block" >提问将会以匿名发出，虽然不会知道发问者是谁，但请不要提出令人感到不开心的问题</span>
+        <span id="helpBlock" class="help-block" >请同意提问须知</span>
+    </div>
+    <div align="center">
+        <button type="submit" class="btn btn-default" >提问</button>
+    </div>
+</form>  
+<script>
+</script>
+{%endblock%}

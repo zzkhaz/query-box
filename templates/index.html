@@ -1,1 +1,30 @@
+<!--引入Flask-Bootstrap中的基模板-->
+{%extends 'bootstrap/base.html'%}
 
+<!--添加html属性-->
+{%block html_attribs%}lang="zh-cn"{%endblock%}
+
+<!--添加metas标签-->
+{%block metas%}
+    {{super()}}
+    <meta charset="UTF-8">
+{%endblock%}
+
+<!--网页标题-->
+{%block title%}提问箱{%endblock%}
+
+<!--网页正文-->
+{%block content%}
+<div align="center" class="jumbotron">
+    <h1>欢迎来到提问箱！</h1>
+    <p>首先花一分钟制作提问箱吧</p>
+    <p><a class="btn btn-primary btn-lg" href='/register' role="button">注册并创建提问箱</a></p>
+    <p><a class="btn btn-primary btn-lg" href='/login' role="button">登陆并管理提问箱</a></p>
+    <ol>
+    <p>制作提问箱并分享提问页面↓</p>
+    <p>提问者发出提问到提问箱（提问为匿名，故不会得知是谁提出的问题）↓</p>
+    <p>回答提问</p>
+    </ol>
+    <p>※使用前请同意<a href="/trm">使用条约</a>、<a href="/pvy">隐私保护政策</a></p>
+</div>
+{%endblock%}

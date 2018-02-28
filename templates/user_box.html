@@ -1,0 +1,48 @@
+<!--引入Flask-Bootstrap中的基模板-->
+{%extends 'bootstrap/base.html'%}
+
+<!--添加html属性-->
+{%block html_attribs%}lang="zh-cn"{%endblock%}
+
+<!--添加metas标签-->
+{%block metas%}
+    {{super()}}
+    <meta charset="UTF-8">
+{%endblock%}
+
+<!--网页标题-->
+{%block title%}{{ user_name }}收到的提问{%endblock%}
+
+<!--网页正文-->
+{%block content%}
+<div class="page-header">
+  <h1>{{ user_name }}的提问箱<small>管理你的提问</small></h1>
+</div>
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href='/{{ user_name }}/box'>未回答的提问</a></li>
+  <li role="presentation"><a href='/{{ user_name }}/box/reply'>已处理的提问</a></li>
+</ul>
+<p>分享你的提问箱，然后在这里管理你收到的问题</p>
+{%if qa_list%}
+<h5>{{ user_name }}过去收到了这些问题...<h5>
+<div class="col-center-block">
+    {%for f in qa_list%}
+        {%if f.STATE == 0%}
+        <table class="table-striped table-hover table-condensed" border="0">
+            <tr>
+                <th>提问日期</th>
+                <td>{{ f.Q_DATE }}</td>
+                <td>该问题未回答</td>
+            </tr>
+            <tr>
+                <th>问题</th>
+                <td>{{ f.QUESTION }}</td>
+                <td><a href="/q/{{ f.QA_ID }}/" target="_blank">回答这个问题</a></td>
+            </tr>
+        </table>
+        <br/>
+        {%endif%}
+    {%endfor%}
+</div>
+{%endif%}
+{%endblock%}

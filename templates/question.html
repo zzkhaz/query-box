@@ -1,0 +1,68 @@
+<!--引入Flask-Bootstrap中的基模板-->
+{%extends 'bootstrap/base.html'%}
+
+<!--添加html属性-->
+{%block html_attribs%}lang="zh-cn"{%endblock%}
+
+<!--添加metas标签-->
+{%block metas%}
+    {{super()}}
+    <meta charset="UTF-8">
+{%endblock%}
+
+<!--网页标题-->
+{%block title%}收到提问{%endblock%}
+
+<!--网页正文-->
+{%block content%}
+<h1><small>这里是</small>{{ user_name }}<small>收到的提问</small></h1><br/>
+{%if qa and qa[6]%}
+<h4>提问已回答</h4>
+<div class="col-center-block">
+    <table class="table-striped table-hover table-condensed" border="0">
+        <tr>
+            <th>提问日期</th>
+            <td>{{ qa[4] }}</td>
+        </tr>
+        <tr>
+            <th>问题</th>
+            <td>{{ qa[2] }}</td>
+        </tr>
+        <tr>
+            <th>回答日期</th>
+            <td>{{ qa[5] }}</td>
+        </tr>
+        <tr>
+            <th>回答</th>
+            <td>{{ qa[3] }}</td>
+        </tr>
+    </table>
+    <br/>
+</div>
+{%endif%}
+{%if qa and qa[6] == 0%}
+<h4>提问未回答</h4>
+<div class="col-center-block">
+    <table class="table-striped table-hover table-condensed" border="0">
+        <tr>
+            <th>提问日期</th>
+            <td>{{ qa[4] }}</td>
+        </tr>
+        <tr>
+            <th>问题</th>
+            <td>{{ qa[2] }}</td>
+        </tr>
+    </table>
+    <form method="post">
+        <div class="form-group">
+            <label for="exampleInputEmail1">来回答提问吧</label>
+            <textarea name="answer" class="form-control" rows="5"></textarea>
+        </div>
+        <button type="submit" class="btn btn-default">回答</button>
+    </form>  
+    <br/>
+</div>
+{%endif%}
+<script>
+</script>
+{%endblock%}
